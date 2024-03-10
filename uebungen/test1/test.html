@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<!-- Demonstrates image -->
+
+<html lang="en">
+
+<head>
+    <title>image</title>
+</head>
+
+<head>
+    <meta name="viewport" content="initial-scale=1, width=device-width"><!-- macht die Seite mobilfreundlich-->
+    <meta property="og:title" content="CS50">
+    <meta property="og:description"
+        content="Introduction to the intellectual enterprises of computer science and the art of programming.">
+    <meta property="og:image" content="cat.jpg">
+    <title>meta</title><!-- macht die Seite mobilfreundlich-->
+</head>
+
+<body>
+    <img alt="photo of bridge" src="bridge.png"><!-- Bild einfügen-->
+
+    <video controls muted> <!-- Video einfügen-->
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    Visit <a href="https://www.harvard.edu">Harvard</a>.<!--zwischen verschiedenen Websiten verlinken-->
+
+    <body>
+        Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>. Vivamus convallis scelerisque quam, vel
+        hendrerit lectus viverra eu. Praesent posuere eget lectus ut faucibus. Etiam eu velit laoreet, gravida lorem in,
+        viverra est. Cras ut purus neque. In porttitor non lorem id lobortis. Mauris gravida metus libero, quis maximus
+        dui porta at. Donec lacinia felis consectetur venenatis scelerisque. Nulla eu nisl sollicitudin, varius velit
+        sit amet, vehicula erat. Curabitur sollicitudin felis sit amet orci mattis, a tempus nulla pulvinar. Aliquam
+        erat volutpat.
+    </body>
+
+    <body><!-- Formulare erstellen -->
+        <form action="https://www.google.com/search" method="get">
+            <input name="q" type="checkbox">
+            <input type="submit" value="Google Search">
+        </form>
+    </body>
+
+    <body><!-- Suche verbessern-->
+        <form action="https://www.google.com/search" method="get">
+            <input autocomplete="off" autofocus name="q" placeholder="Query" type="search">
+            <button>Google Search</button>
+        </form>
+    </body>
+
+    <body> <!-- reguläre Ausdrücke für bestimmtes Formatt (input = email) oder pattern zeigt bestimmtes Aussehen-->
+        <form>
+            <input autocomplete="off" autofocus name="email" pattern=".+@.+\.edu" placeholder="Email" type="email">
+            <button>Register</button>
+        </form>
+    </body>
+
+</body>
+
+</html>

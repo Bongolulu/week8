@@ -1,0 +1,17 @@
+.zutaten {
+    color: purple;
+}
+.quizbutton{
+    background-color: green;
+    border: none;
+}
+.bold {
+    font-style: italic
+}
+#richtigeantwort{
+    font-size: large;
+}
+
+.zutaten, .bold{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
