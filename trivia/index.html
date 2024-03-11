@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <title>Trivia!</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('#blau15').addEventListener('click', function () {
+                document.querySelector('#blau15').style.backgroundColor = 'red';
+                document.querySelector('#incorrect').style.display = 'block';
+                document.querySelector('#correct').style.display = 'none';
+            });
+            document.querySelector('#blau16').addEventListener('click', function () {
+                document.querySelector('#blau16').style.backgroundColor = 'green';
+                document.querySelector('#correct').style.display = 'block';
+                document.querySelector('#incorrect').style.display = 'none';
+            });
+            document.querySelector('#blau17').addEventListener('click', function () {
+                document.querySelector('#blau17').style.backgroundColor = 'red';
+                document.querySelector('#incorrect').style.display = 'block';
+                document.querySelector('#correct').style.display = 'none';
+            });
+
+            document.querySelector('#section2Send').addEventListener('click', function () {
+
+                if (document.querySelector('#Eingabe').value === "Deutschland") {
+                    document.querySelector('#Eingabe').style.backgroundColor = 'green';
+                    document.querySelector('#correct2').style.display = 'block';
+                    document.querySelector('#incorrect2').style.display = 'none';
+
+                } else {
+                    document.querySelector('#Eingabe').style.backgroundColor = 'red';
+                    document.querySelector('#incorrect2').style.display = 'block';
+                    document.querySelector('#correct2').style.display = 'none';
+
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Trivia!</h1>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Part 1: Multiple Choice </h2>
+            <hr>
+            Wie viele Bundesländer hat Deutschland?
+
+            <div id="correct"> Correct! </div>
+            <div id="incorrect"> Incorrect </div>
+
+            <div>
+                <button id="blau15">15</button>
+                <button id="blau16">16</button>
+                <button id="blau17">17</button>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>Part 2: In welchem Land liegt Berlin?</h2>
+
+            <div id="correct2"> Correct! </div>
+            <div id="incorrect2"> Incorrect </div>
+
+            <hr>
+            <div>
+                <input id="Eingabe" type="text">
+                <button id="section2Send">send</button>
+
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
