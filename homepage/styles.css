@@ -12,3 +12,33 @@
 .karusell {
     width: 500px;
 }
+
+
+.accordion {
+    width: 500px;;
+}
+/*teich (container)*/
+.myflex{
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 2em;
+    justify-content: flex-start;
+    min-height: 100%;
+    height: 100%;
+}
+/* alle ungeraden frösche im teich*/
+.myflex :nth-child(odd){
+    background-color: rgb(179, 225, 111);
+    border: rgb(0, 60, 255) 3px solid;
+}
+/* alle geraden frösche im teich*/
+.myflex :nth-child(even){
+    background: rgb(34,193,195);
+    background: linear-gradient(332deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); 
+    border: rgb(253, 45, 198) 3px dashed;
+}
+
+html, body {
+    height: 85%;
+}
