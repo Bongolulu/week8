@@ -17,7 +17,7 @@ sequenceDiagram
     Note over F: Flask analysiert HTTP request und ruft passende Funktion bei "/hello" auf
     Note over F: Flask erstellt "Dictionary" mit dem Key "name" und dem Value "John" in "request.params"
     Note over T: index.html content: '<body>Hello {{ name }}</body>'
-    F->>T: Flas setzt den Value "John" ins Template ein
+    F->>T: Flask setzt den Value "John" ins Template ein
     T-->>F: generiert HTML: '<body>Hello John</body>'
     F-->>C: Antwortet mit HTTP Respose mit dem Inhalt des fertigen htmls.
     C->>U: Zeigt die fertige html Seite mit Hello John an.
