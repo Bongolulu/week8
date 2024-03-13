@@ -1,4 +1,3 @@
-```mermaid
 sequenceDiagram
     participant U as User
     participant C as Chrome
@@ -20,5 +19,9 @@ sequenceDiagram
     F->>T: Flask setzt den Value "John" ins Template ein
     T-->>F: generiert HTML: '<body>Hello John</body>'
     F-->>C: Antwortet mit HTTP Respose mit dem Inhalt des fertigen htmls.
+    C->>F: Sendet ggf. "HTTP GET request" mit Inhalt "/styles.css"
+    C->>F: Sendet ggf. "HTTP GET request" mit Inhalt "/script.js"
+    C->>C: Führt ggf. JavaScript aus
     C->>U: Zeigt die fertige html Seite mit Hello John an.
-```
+    C->>C: Javascript, reagiert auf Ereignisse
+    C->>U: Aktualisiert ggf. die Anzeige mit JavaScript
