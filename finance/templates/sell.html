@@ -17,7 +17,7 @@ Sell
 <body>
     <form method="POST">
         <label for="options">Wähle eine Aktie:</label>
-        <select name="symbol">
+        <select name="symbol" class="form-control mx-auto w-auto">
             <option disabled="" selected="">Symbol</option>
             {% for symbol in symbols %}
             <option value={{symbol}}>{{symbol}}</option>
@@ -28,8 +28,11 @@ Sell
             <input autocomplete="off" class="form-control mx-auto w-auto" min="1" name="shares" placeholder="Anteile"
                 type="number">
         </div class="mb-4">
-        <button type="submit">Absenden</button>
+        <button class="btn btn-primary" type="submit">sell</button>
     </form>
+    {% if fehler %}
+    <div class="shadow-sm p-3 mb-5 mt-10 bg-body-tertiary rounded">{{ fehler }}</div>
+    {% endif %}
 </body>
 
 </html>

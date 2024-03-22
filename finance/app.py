@@ -37,11 +37,12 @@ def after_request(response):
 @login_required
 def index():
     
+    
     # Kontostand
     rows=db.execute("select cash from users where id = ?",session["user_id"])
     kontostand=rows[0]["cash"]
     # Symbol und shares aus history
-    ergebnis=db.execute("select symbol, sum (shares) as anzahl from history where users_id=? group by symbol",session["user_id"])
+    ergebnis=db.execute("select symbol, sum (shares) as anzahl from history where users_id=? group by symbol HAVING anzahl > 0",session["user_id"])
     
     # durchs ganze ergebnis gehen und für jede aktie den aktuellen wert heraussuchen
 
@@ -88,7 +89,7 @@ def buy():
         # buy in db einfügen
         db.execute("INSERT INTO history (users_id, symbol, shares, price) VALUES(?, ?, ?, ?)",session["user_id"], request.form.get("symbol"), anzahl, ergebnis.get("price"))
         
-        # db aktualisieren
+        # db aktualisieren mit cash
         db.execute("update users set cash = ? where id = ?",neuerKontostand, session["user_id"])
 
         return redirect("/")
@@ -218,24 +219,51 @@ def register():
 @login_required
 def sell():
     if request.method == 'POST':
+
         if not request.form.get("shares") or not request.form.get("symbol"):
             return apology("Anzahl und/oder Symbol nicht eingegeben", 403)
+        
+        if re.match(r'^[1-9]\d*$', request.form.get("shares")) is None:
+            return render_template("sell.html",fehler="Bitte eine Zahl größer 0 eingeben.")
+        
+        ergebnis=lookup (request.form.get("symbol"))
+        if not ergebnis:
+            return render_template("buy.html",fehler="Symbol not found")
     
         #ausrechnen, ob noch genügend aktien zur verfügung stehen
         rows=db.execute("select sum (shares) as vorhandeneAktien from history where symbol = ? and users_id = ? group by symbol",request.form.get("symbol"), session["user_id"])
         aktienbestand=rows[0]["vorhandeneAktien"]
         
-        if request.form.get("shares") > aktienbestand:
+        
+
+        shares=int(request.form.get("shares"))
+        if shares > aktienbestand: #str und int!!!
             return apology(f"Too many shares")
         
+        # kaufkosten cash, shares, price
+        verkaufserloes=shares * ergebnis.get("price")
         
+        #ausrechnen, ob noch genügend geld zur verfügung steht
+        rows=db.execute("select cash from users where id = ?",session["user_id"])
+        kontostand=rows[0]["cash"]
         
+        # ausrechnen, wie viel geld noch vorhanden ist    
+        neuerKontostand = (kontostand + verkaufserloes)
         
+        # sell in db einfügen
+        db.execute("INSERT INTO history (users_id, symbol, shares, price) VALUES(?, ?, ?, ?)",session["user_id"], request.form.get("symbol"), shares*-1, ergebnis.get("price"))
         
+        # db aktualisieren mit cash
+        db.execute("update users set cash = ? where id = ?",neuerKontostand, session["user_id"])
+ 
         symbol = request.form['symbol']
-        return f'Du hast die Option {symbol} ausgewählt.'
+        #return f'Du hast die Option {symbol} ausgewählt.'
+
+        return redirect("/")
+    
+    
     else:
-        ergebnis=db.execute("select symbol from history where users_id=? group by symbol",session["user_id"])
+        ergebnis=db.execute("select symbol, sum(shares) as anzahl from history where users_id=? group by symbol having anzahl > 0",session["user_id"])
         symbols=[dct[next(iter(dct))] for dct in ergebnis]
         return render_template('sell.html',symbols=symbols)
 

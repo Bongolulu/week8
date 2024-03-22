@@ -10,6 +10,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th class="text-start"></th>
+            <th class="text-start">Anzahl</th>
+            <th class="text-start"></th>
             <th class="text-start">Symbol</th>
             <th class="text-end">Anzahl</th>
             <th class="text-end">Gesamtwert</th>
@@ -19,12 +22,28 @@
     <tbody>
         <!-- TODO: Loop through the database entries to display them in this table -->
         {% for transaction in index %}
+
         <tr>
-            <td class="text-start">{{ transaction['symbol'] }}</td>
-            <td class="text-end">{{ transaction['anzahl'] }}</td>
-            <td class="text-end">{{ transaction['preis'] | usd }}</td>
-            <td class="text-end">{{ transaction['total'] | usd }}</td>
+            <form action="/buy" method="post">
+                <td class="text-start">
+                    <input hidden value="{{ transaction['symbol'] }}" autocomplete="off" autofocus
+                        class="form-control mx-auto w-auto" name="symbol" placeholder="Symbol" type="text">
+                    <button class="btn btn-sm btn-outline-danger" type="submit">buy</button>
+                </td>
+                <td class="text-start">
+                    <input autocomplete="off" class="form-control mx-auto input-sm " name="shares" placeholder="Anteile"
+                        type="text">
+                </td>
+                <td class="text-start">
+                    <button formaction="/sell" class="btn btn-sm btn-outline-info" type="submit">sell</button>
+                </td>
+                <td class="text-start">{{ transaction['symbol'] }}</td>
+                <td class="text-end">{{ transaction['anzahl'] }}</td>
+                <td class="text-end">{{ transaction['preis'] | usd }}</td>
+                <td class="text-end">{{ transaction['total'] | usd }}</td>
+            </form>
         </tr>
+
         {% endfor %}
     </tbody>
     <tfoot>
