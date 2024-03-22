@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Sell
+{% endblock %}
+
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell</title>
+</head>
+
+<body>
+    <form method="POST">
+        <label for="options">Wähle eine Aktie:</label>
+        <select name="symbol">
+            <option disabled="" selected="">Symbol</option>
+            {% for symbol in symbols %}
+            <option value={{symbol}}>{{symbol}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div class="mb-4">
+            <input autocomplete="off" class="form-control mx-auto w-auto" min="1" name="shares" placeholder="Anteile"
+                type="number">
+        </div class="mb-4">
+        <button type="submit">Absenden</button>
+    </form>
+</body>
+
+</html>
+
+
+{% endblock %}

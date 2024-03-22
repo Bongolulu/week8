@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+
+<h2>Depotbestand</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-start">Symbol</th>
+            <th class="text-end">Anzahl</th>
+            <th class="text-end">Gesamtwert</th>
+            <th class="text-end">Preis</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- TODO: Loop through the database entries to display them in this table -->
+        {% for transaction in index %}
+        <tr>
+            <td class="text-start">{{ transaction['symbol'] }}</td>
+            <td class="text-end">{{ transaction['anzahl'] }}</td>
+            <td class="text-end">{{ transaction['preis'] | usd }}</td>
+            <td class="text-end">{{ transaction['total'] | usd }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="border-0 fw-bold text-end" colspan="3">Cash</td>
+            <td class="border-0 text-end">{{bargeld | usd }}</td>
+        </tr>
+        <tr>
+            <td class="border-0 fw-bold text-end" colspan="3">TOTAL</td>
+            <td class="border-0 w-bold text-end">{{gesamtbetrag | usd }}</td>
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock %}
+
+
+<!-- select symbol, sum (shares) as shares from history where users_id=***eingeloggter user*** group by symbol; macht Tabelle mit Symbol und Summe Anzahl Aktien (total)-->
